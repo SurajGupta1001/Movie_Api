@@ -1,40 +1,37 @@
 const express = require("express");
 const Movie = require("../models/movie.models");
-const router = express.router();
+const router = express.Router();
 
 router.get("/movie/:movie_id", async (req, res, next) => {
   const movie_id = req.params.movie_id;
-  const movie = await Movie.find({ _id: movie_id });
+  const movie = await Movie.find({ _id: movie_id }).populate('cast.actor','name biography -_id').populate('crew.crewMember','name biography -_id');
   res.json({data:movie});
 });
 
 router.get("/movie/:movie_id/credits", async (req, res, next) => {
   const movie_id = req.params.movie_id;
-  const movie = await Movie.find({ _id: movie_id }).populate();
-  res.json({
-    crew: movie.crew,
-    cast: movie.cast,
-  });
+  const movie_crew_cast = await Movie.find({ _id: movie_id }).select('crew cast').populate('cast.actor','name biography -_id').populate('crew.crewMember','name biography -_id');
+  res.json({movie_crew_cast});
 });
 router.get("/movie/:movie_id/images", async (req, res, next) => {
   const movie_id = req.params.movie_id;
-  const movie = await Movie.find({ _id: movie_id });
+  const movie_image = await Movie.find({ _id: movie_id }).select('image');
   res.json({
-    image: movie.image,
+    image: movie_image,
   });
 });
 router.get("/movie/:movie_id/keywords", async (req, res, next) => {
   const movie_id = req.params.movie_id;
-  const movie = await Movie.find({ _id: movie_id });
+  const movie_keywords = await Movie.find({ _id: movie_id }).select('keywords');
   res.json({
-    keywords: movie.keywords,
+    keywords: movie_keywords,
   });
 });
 router.get("/movie/:movie_id/recomendations", async (req, res, next) => {
   const movie_id = req.params.movie_id;
-  const movie = await Movie.find({ _id: movie_id });
+  const movie_recomendations = await Movie.find({ _id: movie_id }).select('recommendations').populate('recommendations');
   res.json({
-    recomendations: movie.recomendations,
+    recomendations: movie_recomendations,
   });
 });
 router.get("/movie/:movie_id/reviews", async (req, res, next) => {

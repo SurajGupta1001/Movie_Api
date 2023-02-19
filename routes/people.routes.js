@@ -1,6 +1,6 @@
 const express = require("express")
 const Person = require("../models/person.model")
-const router = express.router()
+const router = express.Router()
 
 router.get("/person/:person_id", async(req,res,next)=> {
     const person_id = req.params.person_id

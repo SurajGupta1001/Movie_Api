@@ -55,15 +55,6 @@ const movieSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "Movie"
     }
-  ],
-  videos: [
-    {
-        key: String,
-        name: String,
-        site: String,
-        size: Number,
-        type: String
-    }
   ]
 });
 
