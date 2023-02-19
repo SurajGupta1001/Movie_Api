@@ -4,34 +4,44 @@ const router = express.Router();
 
 router.get("/movie/:movie_id", async (req, res, next) => {
   const movie_id = req.params.movie_id;
-  const movie = await Movie.find({ _id: movie_id }).populate('cast.actor','name biography -_id').populate('crew.crewMember','name biography -_id');
-  res.json({data:movie});
+  const movie = await Movie.find({ _id: movie_id })
+    .populate("cast.actor", "name biography -_id")
+    .populate("crew.crewMember", "name biography -_id");
+  res.json({ data: movie });
 });
 
 router.get("/movie/:movie_id/credits", async (req, res, next) => {
   const movie_id = req.params.movie_id;
-  const movie_crew_cast = await Movie.find({ _id: movie_id }).select('crew cast').populate('cast.actor','name biography -_id').populate('crew.crewMember','name biography -_id');
-  res.json({movie_crew_cast});
+  const movie_crew_cast = await Movie.find({ _id: movie_id })
+    .select("crew cast")
+    .populate("cast.actor", "name biography -_id")
+    .populate("crew.crewMember", "name biography -_id");
+  res.json({ movie_crew_cast });
 });
 router.get("/movie/:movie_id/images", async (req, res, next) => {
   const movie_id = req.params.movie_id;
-  const movie_image = await Movie.find({ _id: movie_id }).select('image');
+  const movie_image = await Movie.find({ _id: movie_id }).select("image");
   res.json({
     image: movie_image,
   });
 });
 router.get("/movie/:movie_id/keywords", async (req, res, next) => {
   const movie_id = req.params.movie_id;
-  const movie_keywords = await Movie.find({ _id: movie_id }).select('keywords');
+  const movie_keywords = await Movie.find({ _id: movie_id }).select("keywords");
   res.json({
     keywords: movie_keywords,
   });
 });
 router.get("/movie/:movie_id/recomendations", async (req, res, next) => {
   const movie_id = req.params.movie_id;
-  const movie_recomendations = await Movie.find({ _id: movie_id }).select('recommendations').populate('recommendations');
+  const movie_recomendations = await Movie.findOne({ _id: movie_id }).populate(
+    "recommendations"
+  );
+  const recommendations = movie_recomendations.recommendations.map((a) => {
+    return { title: a.title, overview: a.overview };
+  });
   res.json({
-    recomendations: movie_recomendations,
+    data: recommendations,
   });
 });
 router.get("/movie/:movie_id/reviews", async (req, res, next) => {
@@ -56,25 +66,25 @@ router.get("/movie/:movie_id/videos", async (req, res, next) => {
   });
 });
 router.get("/movie/latest", async (req, res, next) => {
-  const movie = await Movie.find().sort({releaseDate:-1}).limit(10);
+  const movie = await Movie.find().sort({ releaseDate: -1 }).limit(10);
   res.json(movie);
 });
 
 //  Incomplete
-router.get("/movie/now_playing",async(req,res,next)=>{
-    const movie = await Movie.find()
-    res.json()
-})
+router.get("/movie/now_playing", async (req, res, next) => {
+  const movie = await Movie.find();
+  res.json();
+});
 
-router.get("/movie/popular",async(req,res,next)=>{
-    const movie = await Movie.find().sort()
-    res.json()
-})
-router.get("/movie/top_rated",async(req,res,next)=>{
-    res.json()
-})
+router.get("/movie/popular", async (req, res, next) => {
+  const movie = await Movie.find().sort();
+  res.json();
+});
+router.get("/movie/top_rated", async (req, res, next) => {
+  res.json();
+});
 
-router.get("/movie/upcoming",async(req,res,next)=>{
-    res.json()
-})
+router.get("/movie/upcoming", async (req, res, next) => {
+  res.json();
+});
 module.exports = router;

@@ -37,7 +37,7 @@ const movieSchema = new mongoose.Schema({
   ],
   keywords: [String],
   recommendations: [
-    {
+   {
         type: mongoose.Types.ObjectId,
         ref: "Movie"
     }
