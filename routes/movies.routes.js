@@ -35,13 +35,13 @@ router.get("/movie/:movie_id/keywords", async (req, res, next) => {
 router.get("/movie/:movie_id/recomendations", async (req, res, next) => {
   const movie_id = req.params.movie_id;
   const movie_recomendations = await Movie.findOne({ _id: movie_id }).populate(
-    "recommendations"
-  );
-  const recommendations = movie_recomendations.recommendations.map((a) => {
-    return { title: a.title, overview: a.overview };
-  });
+    "recommendations", "title overview -_id"
+  ).select('recommendations -_id');
+  // const recommendations = movie_recomendations.recommendations.map((a) => {
+  //   return { title: a.title, overview: a.overview };
+  // });
   res.json({
-    data: recommendations,
+    data: movie_recomendations,
   });
 });
 router.get("/movie/:movie_id/reviews", async (req, res, next) => {
