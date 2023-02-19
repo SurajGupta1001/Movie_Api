@@ -5,12 +5,12 @@ const router = express.router();
 router.get("/movie/:movie_id", async (req, res, next) => {
   const movie_id = req.params.movie_id;
   const movie = await Movie.find({ _id: movie_id });
-  res.json(movie);
+  res.json({data:movie});
 });
 
 router.get("/movie/:movie_id/credits", async (req, res, next) => {
   const movie_id = req.params.movie_id;
-  const movie = await Movie.find({ _id: movie_id });
+  const movie = await Movie.find({ _id: movie_id }).populate();
   res.json({
     crew: movie.crew,
     cast: movie.cast,
