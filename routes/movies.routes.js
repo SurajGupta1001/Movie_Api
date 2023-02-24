@@ -87,6 +87,12 @@ router.get("/movie/top_rated", async (req, res, next) => {
   res.json();
 });
 
+
+router.get("/movie/images/testing/", (req,res,next) => {
+    console.log(req.query);
+    res.send(req.query)
+})
+// http://localhost:4000/movie/images/testing/?year=100&&image=1.2
 router.get("/movie/upcoming", async (req, res, next) => {
   res.json();
 });
