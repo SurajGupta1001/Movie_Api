@@ -46,9 +46,9 @@ router.get("/movie/:movie_id/recomendations", async (req, res, next) => {
 });
 router.get("/movie/:movie_id/reviews", async (req, res, next) => {
   const movie_id = req.params.movie_id;
-  const movie = await Movie.find({ _id: movie_id });
+  const movie_reviews = await Movie.find({ _id: movie_id }).select('reviews.author reviews.content reviews.rating -_id');
   res.json({
-    reviews: movie.reviews,
+    data: movie_reviews,
   });
 });
 router.get("/movie/:movie_id/similar", async (req, res, next) => {
@@ -65,7 +65,7 @@ router.get("/movie/:movie_id/videos", async (req, res, next) => {
     videos: movie.videos,
   });
 });
-router.get("/movie/latest", async (req, res, next) => {
+router.get("/movie/latest", async (req, res, next) => {//not working
   const movie = await Movie.find().sort({ releaseDate: -1 }).limit(10);
   res.json(movie);
 });
@@ -73,7 +73,10 @@ router.get("/movie/latest", async (req, res, next) => {
 //  Incomplete
 router.get("/movie/now_playing", async (req, res, next) => {
   const movie = await Movie.find();
-  res.json();
+  console.log(movie)
+  res.json({
+    data: movie
+  });
 });
 
 router.get("/movie/popular", async (req, res, next) => {

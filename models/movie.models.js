@@ -55,7 +55,8 @@ const movieSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "Movie"
     }
-  ]
+  ],
+  nowPlaying : Boolean
 });
 
 const Movie = mongoose.model("Movie",movieSchema)
