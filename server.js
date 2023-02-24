@@ -6,6 +6,8 @@ const dotenv = require("dotenv")
 const connectAdmin = require("./admin/admin")
 dotenv.config()
 const movierouter = require("./routes/movies.routes")
+const peoplerouter = require("./routes/people.routes")
+const searchrouter = require("./routes/search.routes")
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
@@ -14,6 +16,8 @@ app
 connectAdmin(app)
 
 app.use(movierouter)
+app.use(peoplerouter)
+app.use(searchrouter)
 
 const port = process.env.PORT
 const startServer = async()=>{
