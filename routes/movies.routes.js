@@ -1,5 +1,5 @@
 const express = require("express");
-const Movie = require("../models/movie.models");
+const {Movie,Genre} = require("../models/movie.models");
 const router = express.Router();
 
 router.get("/movie/popular", async (req, res, next) => {
@@ -27,7 +27,7 @@ router.get("/movie/latest", async (req, res, next) => {//not working
 
 router.get("/movie/:movie_id", async (req, res, next) => {
   const movie_id = req.params.movie_id;
-  const movie = await Movie.find({ _id: movie_id })
+  const movie = await Movie.find({ _id: movie_id }).populate('genre')
     .populate("cast.actor", "name biography -_id")
     .populate("crew.crewMember", "name biography -_id");
   res.json({ data: movie });
@@ -85,6 +85,23 @@ router.get("/movie/:movie_id/videos", async (req, res, next) => {
     videos: movie.videos,
   });
 });
+
+router.get("/genre/movie/list", async(req,res,next)=> {
+  const genre = await Genre.find().select("-_id")
+  res.json({
+    data: genre
+  })
+})
+
+router.get("/discover/movie", async(req,res,next)=> {
+  const movie = await Movie.find({
+    'reviews.rating': {$gt: req.query.rating, $lt: 20},
+
+  })
+  res.json({
+    data: movie
+  })
+})
 
 module.exports = router;
 
