@@ -2,6 +2,10 @@ const express = require("express");
 const Movie = require("../models/movie.models");
 const router = express.Router();
 
+router.get("/movie/popular", async (req, res, next) => {
+  const movie = await Movie.find().sort('-reviews.rating').limit(10);
+  res.json({data:movie});
+});
 //  Incomplete
 router.get("/movie/now_playing", async (req, res, next) => {
   const movie = await Movie.find({nowPlaying:true});
@@ -79,10 +83,6 @@ router.get("/movie/:movie_id/videos", async (req, res, next) => {
 });
 
 
-router.get("/movie/popular", async (req, res, next) => {
-  const movie = await Movie.find().sort();
-  res.json();
-});
 router.get("/movie/top_rated", async (req, res, next) => {
   res.json();
 });
@@ -91,3 +91,4 @@ router.get("/movie/upcoming", async (req, res, next) => {
   res.json();
 });
 module.exports = router;
+
