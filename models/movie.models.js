@@ -56,7 +56,11 @@ const movieSchema = new mongoose.Schema({
         ref: "Movie"
     }
   ],
-  nowPlaying : Boolean
+  status: {
+    type: String,
+    enum: ['NOWPLAYING','UPCOMING','NEW'],
+    default: 'NEW'
+  }
 });
 
 const Movie = mongoose.model("Movie",movieSchema)
