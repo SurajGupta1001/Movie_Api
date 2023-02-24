@@ -6,13 +6,20 @@ router.get("/movie/popular", async (req, res, next) => {
   const movie = await Movie.find().sort('-reviews.rating').limit(10);
   res.json({data:movie});
 });
-//  Incomplete
 router.get("/movie/now_playing", async (req, res, next) => {
-  const movie = await Movie.find({nowPlaying:true});
+  const movie = await Movie.find({status: 'NOWPLAYING'});
   res.json({
     data: movie
   });
 });
+
+router.get("/movie/upcoming", async (req, res, next) => {
+  const movie = await Movie.find({status: 'UPCOMING'});
+  res.json({
+    data: movie
+  });
+});
+
 router.get("/movie/latest", async (req, res, next) => {//not working
   const movie = await Movie.find().sort({ releaseDate: -1 }).limit(10);
   res.json(movie);
@@ -53,9 +60,6 @@ router.get("/movie/:movie_id/recomendations", async (req, res, next) => {
   const movie_recomendations = await Movie.findOne({ _id: movie_id }).populate(
     "recommendations", "title overview -_id"
   ).select('recommendations -_id');
-  // const recommendations = movie_recomendations.recommendations.map((a) => {
-  //   return { title: a.title, overview: a.overview };
-  // });
   res.json({
     data: movie_recomendations,
   });
@@ -82,13 +86,5 @@ router.get("/movie/:movie_id/videos", async (req, res, next) => {
   });
 });
 
-
-router.get("/movie/top_rated", async (req, res, next) => {
-  res.json();
-});
-
-router.get("/movie/upcoming", async (req, res, next) => {
-  res.json();
-});
 module.exports = router;
 
