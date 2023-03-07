@@ -30,7 +30,7 @@ router.get("/movie/:movie_id", async (req, res, next) => {
   const movie = await Movie.find({ _id: movie_id }).populate('genre')
     .populate("cast.actor", "name biography -_id")
     .populate("crew.crewMember", "name biography -_id");
-  res.json({ data: movie });
+  res.json({ data: movie }); 
 });
 
 router.get("/movie/:movie_id/credits", async (req, res, next) => {
