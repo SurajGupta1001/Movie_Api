@@ -55,6 +55,7 @@ module.exports.postRegister = async (req, res) => {
   }
 
   transporter.sendMail(mailOptions, function (err, data) {
+    console.log(data)
     if (err) {
       return res.render('home', {
         message: err.message

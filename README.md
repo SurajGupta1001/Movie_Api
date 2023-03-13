@@ -1,14 +1,17 @@
 # Movie_Api
-- Documentation with postman
-- UI/Pages
-- Routes Complete Fixup
-
-
-
 - Pagination Logic to seprate
-- Caching
+
+- Documentation with postman
+
+- UI/Pages
+
+- Admin JS
+
+
+
+- Caching / Render Redis or Docker Redis
 - Test Driven Enivornment
-- Modify Admin
+
 
 
 
@@ -16,4 +19,5 @@
 - Docker 
 - CI / CD workflow
 - Github pages
-- Email Verification
+- Write a nice logger
+

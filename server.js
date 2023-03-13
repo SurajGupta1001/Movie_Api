@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const morgan = require('morgan')
 const dotenv = require('dotenv')
 const { notFound, errorHandler } = require('./middleware/errorMiddleware')
-// const connectAdmin = require("./admin/admin")
+const connectAdmin = require("./admin/admin")
 const ejs = require('ejs')
 const movieRoutes = require('./routes/movies.routes')
 const tokenRoutes = require('./routes/auth.routes')
@@ -18,7 +18,7 @@ app.set('view engine', 'ejs')
 app.set('views', 'views')
 app.use(morgan('tiny'))
 
-// connectAdmin(app)
+connectAdmin(app)
 
 app.use(movieRoutes)
 app.use(tokenRoutes)
@@ -29,7 +29,7 @@ app.use(errorHandler)
 const port = process.env.PORT
 const startServer = async () => {
   mongoose.set('strictQuery', true);
-  await mongoose.connect(process.env.MONGO_URI)
+  const mongoDB = await mongoose.connect(process.env.MONGO_URI)
   console.log('Database connected')
   app.listen(port, () => {
     console.log('Server started at http://localhost:4000')

@@ -28,7 +28,6 @@ module.exports.getPopularMovies = asyncHandler(async (req, res, next) => {
   res.json({ data: movie })
 })
 
-// Handle
 module.exports.getNowPlayingMovies = asyncHandler(async (req, res, next) => {
   const movie = await Movie.find({ status: 'Latest' })
   res.json({
@@ -44,7 +43,6 @@ module.exports.getUpcomingMovies = asyncHandler(async (req, res, next) => {
 })
 
 module.exports.getLatestMovies = asyncHandler(async (req, res, next) => {
-  //not working
   const movie = await Movie.find().sort({ release_date: -1 }).limit(10)
   res.json(movie)
 })
