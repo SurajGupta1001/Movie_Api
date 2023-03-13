@@ -8,7 +8,6 @@ const ejs = require('ejs')
 const movieRoutes = require('./routes/movies.routes')
 const tokenRoutes = require('./routes/auth.routes')
 
-
 const AdminJS = require('adminjs')
 const AdminJSExpress = require('@adminjs/express')
 const AdminJSMongoose = require('@adminjs/mongoose')
