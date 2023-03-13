@@ -48,14 +48,14 @@ module.exports.postRegister = async (req, res) => {
   })
 
   let mailOptions = {
-    from: `vikashraj01235@gmail.com`,
+    from: `surajraj4976@gmail.com`,
     to: `${email}`,
     subject: 'Nodemailer Project',
-    text: `Your Token Is ${token}`
+    text: `Your Token Is   ${token}`
   }
 
   transporter.sendMail(mailOptions, function (err, data) {
-    console.log(data)
+    // console.log(data)
     if (err) {
       return res.render('home', {
         message: err.message
