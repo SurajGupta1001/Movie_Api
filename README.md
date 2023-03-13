@@ -1,7 +1,6 @@
 # Movie_Api
 - Documentation with postman
 - UI/Pages
-- Pagination
 - Routes Complete Fixup
 
 
