@@ -13,27 +13,31 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  favorites: [
-    {
-      type: mongoose.Types.ObjectId,
-      ref: "Movie",
-    },
-  ],
-  ratings: [
-    {
-      movie: {
-        type: mongoose.Types.ObjectId,
-        ref: "Movie",
-      },
-      rating: Number,
-    },
-  ],
-  watchlist: [
-    {
-      type: mongoose.Types.ObjectId,
-      ref: "Movie",
-    },
-  ],
+  token: {
+    type: String, 
+    required:true
+  }
+  // favorites: [
+  //   {
+  //     type: mongoose.Types.ObjectId,
+  //     ref: "Movie",
+  //   },
+  // ],
+  // ratings: [
+  //   {
+  //     movie: {
+  //       type: mongoose.Types.ObjectId,
+  //       ref: "Movie",
+  //     },
+  //     rating: Number,
+  //   },
+  // ],
+  // watchlist: [
+  //   {
+  //     type: mongoose.Types.ObjectId,
+  //     ref: "Movie",
+  //   },
+// }],
 });
 
 const User = mongoose.model("User",userSchema)

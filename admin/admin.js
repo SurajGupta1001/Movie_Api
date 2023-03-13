@@ -2,7 +2,7 @@ const AdminJS = require('adminjs')
 const AdminJSExpress = require('@adminjs/express')
 const AdminJSMongoose = require('@adminjs/mongoose')
 
-const {Movie,Genre} = require("../models/movie.models")
+const {Movie} = require("../models/movie.models")
 const Person = require("../models/person.model")
 const User = require("../models/user.models")
 
@@ -12,8 +12,8 @@ AdminJS.registerAdapter({
 })
 
 const adminOptions = {
-  resources: [Movie,Genre,Person,User]
-}
+  resources: [Movie,Person,User]
+} 
 const admin = new AdminJS(adminOptions)
 
 const adminRouter = AdminJSExpress.buildRouter(admin)
