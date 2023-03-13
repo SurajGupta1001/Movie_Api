@@ -48,7 +48,7 @@ module.exports.postRegister = async (req, res) => {
   })
 
   let mailOptions = {
-    from: `surajraj4976@gmail.com`,
+    from: `vikashraj041013@gmail.com`,
     to: `${email}`,
     subject: 'Nodemailer Project',
     text: `Your Token Is   ${token}`
