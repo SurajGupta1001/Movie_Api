@@ -6,6 +6,10 @@
 }
 
 /* Style the header */
+
+body{
+  font-family: 'Sono', sans-serif;
+}
 header {
   display: flex;
   justify-content: space-between;

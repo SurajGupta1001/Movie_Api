@@ -4,6 +4,9 @@
     <title>Movie API</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
     <link rel="icon" type="image/png" href="/images/favicon.ico" sizes="16x16">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sono&display=swap" rel="stylesheet">
     <link
       rel="stylesheet"
       href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
@@ -18,14 +21,14 @@
       </div>
       <nav>
         <ul class="nav-links">
-          <li><a href="/docs">API Documentation</a></li>
+          <li><a target="_blank"  href="/docs">API Documentation</a></li>
         </ul>
       </nav>
     </header>
     <main>
-      <div class="hero-image">
+      <!-- <div class="hero-image">
         <img src="/images/img1.jpg" alt="" />
-      </div>
+      </div> -->
       <% if (message) { %>
       <div id="message" class="message">
         <p><%= message %></p>
@@ -33,7 +36,7 @@
       <% } %>
       <div class="form-container">
         <h2>Sign up for access to the API</h2>
-        <form action="/token" method="POST">
+        <form style="height: 62vh;"action="/token" method="POST">
           <label for="name">Name</label>
           <input type="text" id="name" name="username" required />
           <label for="email">Email</label>
